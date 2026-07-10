@@ -847,3 +847,124 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+// Dynamic category filtering logic for projects portfolio page
+function setProjectFilter(category, button) {
+    // Update active tab button style classes
+    const tabs = document.querySelectorAll('.filter-tab-btn');
+    if (tabs) {
+        tabs.forEach(tab => tab.classList.remove('active'));
+    }
+    if (button) {
+        button.classList.add('active');
+    }
+
+    // Filter project cards visibility
+    const cards = document.querySelectorAll('.premium-project-card');
+    if (!cards) return;
+
+    cards.forEach(card => {
+        const cardCategory = card.getAttribute('data-category');
+        if (category === 'all' || cardCategory === category) {
+            // Show card with fade & scale animation
+            card.style.display = 'flex';
+            setTimeout(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'scale(1)';
+            }, 50);
+        } else {
+            // Hide card
+            card.style.opacity = '0';
+            card.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                card.style.display = 'none';
+            }, 400); // match CSS transitions
+        }
+    });
+}
+
+// Global active gallery state
+let currentGalleryImages = [];
+let currentGalleryIndex = 0;
+
+function openProjectGallery(imagesArray) {
+    if (!imagesArray || imagesArray.length === 0) return;
+    currentGalleryImages = imagesArray;
+    currentGalleryIndex = 0;
+    
+    const modal = document.getElementById('gallery-modal');
+    const activeImg = document.getElementById('gallery-active-img');
+    const counter = document.getElementById('gallery-counter');
+    
+    if (!modal || !activeImg) return;
+    
+    // Set initial image content & size metadata
+    activeImg.src = currentGalleryImages[currentGalleryIndex];
+    if (counter) {
+        counter.innerText = `1 / ${currentGalleryImages.length}`;
+    }
+    
+    // Open modal animation flow
+    modal.style.display = 'flex';
+    setTimeout(() => {
+        modal.style.opacity = '1';
+    }, 50);
+    
+    // Prevent document body scrolling
+    document.body.classList.add('modal-open');
+}
+
+function closeProjectGallery() {
+    const modal = document.getElementById('gallery-modal');
+    if (!modal) return;
+    
+    modal.style.opacity = '0';
+    setTimeout(() => {
+        modal.style.display = 'none';
+    }, 400);
+    
+    // Re-enable document body scrolling
+    document.body.classList.remove('modal-open');
+}
+
+function nextGalleryImage() {
+    if (currentGalleryImages.length <= 1) return;
+    
+    const activeImg = document.getElementById('gallery-active-img');
+    const counter = document.getElementById('gallery-counter');
+    if (!activeImg) return;
+    
+    activeImg.style.transform = 'scale(0.97)';
+    activeImg.style.opacity = '0.5';
+    
+    setTimeout(() => {
+        currentGalleryIndex = (currentGalleryIndex + 1) % currentGalleryImages.length;
+        activeImg.src = currentGalleryImages[currentGalleryIndex];
+        if (counter) {
+            counter.innerText = `${currentGalleryIndex + 1} / ${currentGalleryImages.length}`;
+        }
+        activeImg.style.transform = 'scale(1)';
+        activeImg.style.opacity = '1';
+    }, 150);
+}
+
+function prevGalleryImage() {
+    if (currentGalleryImages.length <= 1) return;
+    
+    const activeImg = document.getElementById('gallery-active-img');
+    const counter = document.getElementById('gallery-counter');
+    if (!activeImg) return;
+    
+    activeImg.style.transform = 'scale(0.97)';
+    activeImg.style.opacity = '0.5';
+    
+    setTimeout(() => {
+        currentGalleryIndex = (currentGalleryIndex - 1 + currentGalleryImages.length) % currentGalleryImages.length;
+        activeImg.src = currentGalleryImages[currentGalleryIndex];
+        if (counter) {
+            counter.innerText = `${currentGalleryIndex + 1} / ${currentGalleryImages.length}`;
+        }
+        activeImg.style.transform = 'scale(1)';
+        activeImg.style.opacity = '1';
+    }, 150);
+}
