@@ -67,8 +67,8 @@
                 <a href="#" class="social-icon" aria-label="YouTube" id="header-social-yt">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-svg"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
                 </a>
-                <a href="#" class="social-icon" aria-label="X (Twitter)" id="header-social-x">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-svg"><path d="M4 4l11.733 16h4.267l-11.733 -16z"/><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/></svg>
+                <a href="https://wa.me/919601126500" class="social-icon" aria-label="WhatsApp" id="header-social-wa" target="_blank">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-svg"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
                 </a>
             </div>
 
@@ -93,7 +93,9 @@
 
     <!-- Overlay Navigation Menu Drawer -->
     <div class="overlay-nav-menu" id="overlay-nav-menu">
-        <button class="overlay-close-btn" id="overlay-close-btn" aria-label="Close menu">&times;</button>
+        <button class="overlay-close-btn" id="overlay-close-btn" aria-label="Close menu">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 24px; height: 24px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
         <div class="overlay-menu-content">
             <div class="overlay-menu-brand">
                 <img src="images/logo new.png" alt="M ONE SPACE Logo" class="overlay-logo">
@@ -101,23 +103,28 @@
             <nav class="overlay-nav-list-container">
                 <ul class="overlay-nav-list">
                     <li><a href="#hero" class="overlay-nav-item" id="overlay-home">Home</a></li>
-                    <li><a href="#about" class="overlay-nav-item" id="overlay-about">About Us</a></li>
-                    <li><a href="#services" class="overlay-nav-item" id="overlay-services">Services</a></li>
-                    <li><a href="#properties" class="overlay-nav-item" id="overlay-properties">Properties</a></li>
-                    <li><a href="#faqs" class="overlay-nav-item" id="overlay-faq">FAQs</a></li>
-                    <li><a href="#contact" class="overlay-nav-item" id="overlay-contact">Contact</a></li>
+                    <li><a href="about.html" class="overlay-nav-item" id="overlay-about">About Us</a></li>
+                    <li><a href="services.html" class="overlay-nav-item" id="overlay-services">Services</a></li>
+                    <li><a href="index.html#properties" class="overlay-nav-item" id="overlay-properties">Properties</a></li>
+                    <li><a href="contact.html" class="overlay-nav-item" id="overlay-contact">Contact</a></li>
                 </ul>
             </nav>
             <div class="overlay-menu-footer">
-                <a href="tel:9601126500" class="btn btn-primary" id="overlay-call-btn">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-svg"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                    <span>9601126500</span>
-                </a>
+                <div style="display: flex; flex-direction: column; gap: 0.75rem; width: 100%; align-items: center;">
+                    <a href="tel:9601126500" class="btn btn-primary" id="overlay-call-btn" style="width: 100%; max-width: 250px; justify-content: center;">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-svg"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        <span>9601126500</span>
+                    </a>
+                    <a href="tel:9909211193" class="btn btn-primary" id="overlay-call-btn-2" style="width: 100%; max-width: 250px; justify-content: center;">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-svg"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                        <span>9909211193</span>
+                    </a>
+                </div>
                 <div class="overlay-socials">
                     <a href="#" class="social-icon" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-svg"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
                     <a href="#" class="social-icon" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-svg"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
                     <a href="#" class="social-icon" aria-label="YouTube"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-svg"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg></a>
-                    <a href="#" class="social-icon" aria-label="X (Twitter)"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-svg"><path d="M4 4l11.733 16h4.267l-11.733 -16z"/><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/></svg></a>
+                    <a href="https://wa.me/919601126500" class="social-icon" aria-label="WhatsApp" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-svg"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></a>
                 </div>
             </div>
         </div>
@@ -239,6 +246,7 @@
             </div>
         </div>
     </section>
+
 
     <!-- Services Section -->
     <section class="services-section" id="services">
@@ -642,7 +650,7 @@
                             </div>
                             <div class="detail-text">
                                 <span class="detail-label">Call or WhatsApp</span>
-                                <a href="tel:9601126500" class="detail-value" id="contact-link-phone">9601126500</a>
+                                <a href="tel:9601126500" class="detail-value" id="contact-link-phone-1">9601126500</a> <span class="detail-value" style="color: var(--text-light); margin: 0 0.25rem;">/</span> <a href="tel:9909211193" class="detail-value" id="contact-link-phone-2">9909211193</a>
                             </div>
                         </div>
 
@@ -662,14 +670,13 @@
                             </div>
                             <div class="detail-text">
                                 <span class="detail-label">Registered Office Location</span>
-                                <span class="detail-value-text">Gota-Chandlodiya Ring Road, Opp HDFC Bank, Gota, Ahmedabad, Gujarat 382481</span>
+                                <span class="detail-value-text">A - 603 Moneyplant Highstreet, Opp Bsnl office, Jagatpur road, Gota, Ahmedabad - 382470</span>
                             </div>
                         </div>
                     </div>
 
                     <div class="owner-metadata">
-                        <strong>Principal Consultant:</strong> Maulik Sureshbhai Patel <br>
-                        <strong>GSTIN:</strong> 24AAAFM1026M1ZN (Certified)
+                        <strong>Principal Consultant:</strong> Maulik Sureshbhai Patel
                     </div>
                 </div>
 
@@ -701,7 +708,13 @@
                             <label for="form-message">Message or Preferred Project</label>
                             <textarea id="form-message" rows="4" placeholder="I am interested in Status Sharan/Aristo/The Olive..."></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-full btn-submit" id="form-submit-button">Submit Request</button>
+                        <div class="form-btn-group" style="display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap;">
+                            <button type="submit" class="btn btn-primary" id="form-submit-button" style="flex: 1; margin-top: 0; min-width: 180px;">Submit Callback</button>
+                            <button type="button" class="btn btn-whatsapp" id="form-whatsapp-submit" style="flex: 1; min-width: 180px;" onclick="handleWhatsAppSubmit(event)">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 18px; height: 18px;"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                                Submit via WhatsApp
+                            </button>
+                        </div>
                     </form>
                     <div id="form-response-msg" class="form-success-alert"></div>
                 </div>
@@ -729,7 +742,7 @@
                     <div class="footer-contact-info">
                         <p class="contact-item">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="footer-icon-svg"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                            <a href="tel:9601126500">9601126500</a>
+                            <a href="tel:9601126500">9601126500</a>, <a href="tel:9909211193">9909211193</a>
                         </p>
                         <p class="contact-item">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="footer-icon-svg"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
@@ -737,7 +750,7 @@
                         </p>
                         <p class="contact-item">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="footer-icon-svg"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                            <span>Gota-Chandlodiya Ring Road, Opp HDFC Bank, Gota, Ahmedabad, Gujarat 382481</span>
+                            <span>A - 603 Moneyplant Highstreet, Opp Bsnl office, Jagatpur road, Gota, Ahmedabad - 382470</span>
                         </p>
                     </div>
                     <div class="footer-socials">
@@ -760,11 +773,11 @@
                 <div class="footer-col">
                     <h3 class="footer-title">Services</h3>
                     <ul class="footer-links-list">
-                        <li><a href="#services">New Construction Sites</a></li>
-                        <li><a href="#services">Duplexes & Bungalows</a></li>
-                        <li><a href="#services">Premium Resale Listings</a></li>
-                        <li><a href="#services">Rent & Leases</a></li>
-                        <li><a href="#services">Documentation & Registry</a></li>
+                        <li><a href="services.html">New Construction Sites</a></li>
+                        <li><a href="services.html">Duplexes & Bungalows</a></li>
+                        <li><a href="services.html">Premium Resale Listings</a></li>
+                        <li><a href="services.html">Rent & Leases</a></li>
+                        <li><a href="services.html">Documentation & Registry</a></li>
                     </ul>
                 </div>
 
@@ -773,11 +786,10 @@
                     <h3 class="footer-title">Support</h3>
                     <ul class="footer-links-list">
                         <li><a href="#hero">Home</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#services">Services</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Services</a></li>
                         <li><a href="#properties">Properties</a></li>
-                        <li><a href="#faqs">FAQs</a></li>
-                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
                     </ul>
                 </div>
 
@@ -796,12 +808,10 @@
             <div class="footer-meta-info">
                 <span>Established: June 2026</span>
                 <span>Owner: Maulik Sureshbhai Patel</span>
-                <span>GSTIN: 24AAAFM1026M1ZN (Certified)</span>
             </div>
             
             <div class="footer-bottom-row">
                 <p class="copyright-text">&copy; 2026 M ONE SPACE. All rights reserved. Direct Builder Channel Partner.</p>
-                <p class="disclaimer-text">Disclaimer: All project renderings, floor layouts, and pricing details are provided by developers. M ONE SPACE operates as an authorized channel partner and does not charge brokerage fees for direct client bookings.</p>
             </div>
         </div>
     </footer>
@@ -809,7 +819,9 @@
     <!-- Enquiry Modal Dialog -->
     <div class="enquiry-modal" id="enquiry-modal-dialog">
         <div class="enquiry-modal-content">
-            <button class="modal-close-btn" id="btn-modal-close" onclick="closeEnquiryModal()">&times;</button>
+            <button class="modal-close-btn" id="btn-modal-close" onclick="closeEnquiryModal()" aria-label="Close modal">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px;"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
             <h3 class="modal-title" id="modal-project-title">Project Enquiry</h3>
             <p class="modal-subtitle">Leave your details and Maulik Patel's executive team will arrange a call.</p>
             <form id="modal-enquiry-form" onsubmit="handleModalSubmit(event)">
@@ -826,7 +838,13 @@
                     <label for="modal-email">Email Address</label>
                     <input type="email" id="modal-email" placeholder="Optional">
                 </div>
-                <button type="submit" class="btn btn-primary btn-full" id="btn-modal-submit">Submit Enquiry</button>
+                <div class="form-btn-group" style="display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap;">
+                    <button type="submit" class="btn btn-primary" id="btn-modal-submit" style="flex: 1; margin-top: 0; min-width: 150px;">Submit Callback</button>
+                    <button type="button" class="btn btn-whatsapp" id="btn-modal-whatsapp" style="flex: 1; min-width: 150px;" onclick="handleModalWhatsAppSubmit(event)">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 18px; height: 18px;"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                        Submit via WhatsApp
+                    </button>
+                </div>
             </form>
             <div id="modal-response-msg" class="form-success-alert"></div>
         </div>

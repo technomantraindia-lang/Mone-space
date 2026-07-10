@@ -255,6 +255,99 @@ document.addEventListener('DOMContentLoaded', () => {
             selector.addEventListener('click', handleServiceSelect);
         });
     }
+
+
+
+    // 6d. Redesigned Premium About Us Interactive Storytelling Tabs
+    const aboutTabButtons = document.querySelectorAll('.about-tab-btn');
+    const aboutTabPanes = document.querySelectorAll('.tab-pane');
+
+    aboutTabButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Remove active class from all buttons and panes
+            aboutTabButtons.forEach(b => b.classList.remove('active'));
+            aboutTabPanes.forEach(pane => {
+                pane.classList.remove('active');
+                pane.style.display = 'none';
+                pane.style.opacity = '0';
+            });
+
+            // Activate current tab button
+            btn.classList.add('active');
+
+            // Find matching pane
+            const targetId = btn.getAttribute('data-tab');
+            const targetPane = document.getElementById(targetId);
+
+            if (targetPane) {
+                targetPane.style.display = 'block';
+                // Trigger reflow for CSS transition
+                targetPane.offsetHeight;
+                setTimeout(() => {
+                    targetPane.classList.add('active');
+                    targetPane.style.opacity = '1';
+                }, 10);
+            }
+        });
+    });
+
+    // 6d. 3D Interactive Mouse-Tilt Card Parallax Effect
+    const cardTrigger = document.getElementById('about-3d-card-trigger');
+    const cardImg = document.getElementById('about-3d-img');
+    const floatBadges = document.querySelectorAll('.floating-glass-badge');
+
+    if (cardTrigger) {
+        cardTrigger.addEventListener('mousemove', (e) => {
+            const rect = cardTrigger.getBoundingClientRect();
+            const x = e.clientX - rect.left; // x coordinate inside element
+            const y = e.clientY - rect.top;  // y coordinate inside element
+            
+            // Calculate tilt angle values (-12deg to +12deg)
+            const rotateX = ((rect.height / 2) - y) / (rect.height / 2) * 12;
+            const rotateY = (x - (rect.width / 2)) / (rect.width / 2) * 12;
+
+            // Apply 3D rotate to main wrapper
+            cardTrigger.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+
+            // Subtle counter-translation/parallax to inner image
+            if (cardImg) {
+                cardImg.style.transform = `scale(1.05) translateX(${-rotateY * 0.5}px) translateY(${rotateX * 0.5}px)`;
+            }
+
+            // Apply parallax shift to floating glass badges
+            floatBadges.forEach(badge => {
+                const speed = parseFloat(badge.style.getPropertyValue('--parallax-speed')) || 0.2;
+                badge.style.transform = `translateX(${rotateY * speed * 8}px) translateY(${-rotateX * speed * 8}px)`;
+            });
+        });
+
+        cardTrigger.addEventListener('mouseleave', () => {
+            // Reset transforms on mouse leave
+            cardTrigger.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg)`;
+            if (cardImg) {
+                cardImg.style.transform = `scale(1) translateX(0) translateY(0)`;
+            }
+            floatBadges.forEach(badge => {
+                badge.style.transform = `translateX(0) translateY(0)`;
+            });
+        });
+    }
+
+    // 6e. Core Commitments Glow follower tracking coordinates
+    const glowCards = document.querySelectorAll('.glow-card');
+    glowCards.forEach(card => {
+        card.style.setProperty('--mouse-x', `50%`);
+        card.style.setProperty('--mouse-y', `50%`);
+        
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            card.style.setProperty('--mouse-x', `${x}px`);
+            card.style.setProperty('--mouse-y', `${y}px`);
+        });
+    });
 });
 
 // 7. Hero Search Filtering & Routing Action
@@ -333,12 +426,12 @@ function handleFormSubmit(event) {
 
     // Simulate luxury API response lag
     setTimeout(() => {
-        submitBtn.innerText = "Submit Request";
+        submitBtn.innerText = "Submit Callback";
         submitBtn.disabled = false;
         
         // Show structured success feedback
         msgAlert.style.display = "block";
-        msgAlert.innerHTML = `<strong>Consultation Requested!</strong><br>Thank you, ${name}. Maulik Patel's consulting office will contact you on <strong>${phone}</strong> shortly regarding your interest in: <em>"${serviceName}"</em>.`;
+        msgAlert.innerHTML = `<strong>Consultation Requested!</strong><br>Thank you, ${name}. Maulik Patel's consulting office will contact you via <strong>Phone call</strong> on <strong>${phone}</strong> shortly regarding your interest in: <em>"${serviceName}"</em>.`;
         
         // Reset form
         document.getElementById('consultation-form').reset();
@@ -391,11 +484,11 @@ function handleModalSubmit(event) {
     submitBtn.disabled = true;
 
     setTimeout(() => {
-        submitBtn.innerText = "Submit Enquiry";
+        submitBtn.innerText = "Submit Callback";
         submitBtn.disabled = false;
         
         modalResponse.style.display = "block";
-        modalResponse.innerHTML = `<strong>Enquiry Saved!</strong><br>Thank you, ${name}. Our dedicated channel team has scheduled an update for you regarding <strong>${projectName}</strong>. We'll connect with you on <strong>${phone}</strong>.`;
+        modalResponse.innerHTML = `<strong>Enquiry Saved!</strong><br>Thank you, ${name}. Our dedicated channel team has scheduled an update for you regarding <strong>${projectName}</strong>. We'll connect with you via <strong>Phone call</strong> on <strong>${phone}</strong>.`;
         
         document.getElementById('modal-enquiry-form').reset();
 
@@ -411,4 +504,346 @@ window.addEventListener('click', (event) => {
     if (event.target === modal) {
         closeEnquiryModal();
     }
+});
+
+// WhatsApp direct submissions
+function handleWhatsAppSubmit(event) {
+    event.preventDefault();
+    
+    const form = document.getElementById('consultation-form');
+    if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+    }
+    
+    const name = document.getElementById('form-name').value;
+    const phone = document.getElementById('form-phone').value;
+    const serviceSelect = document.getElementById('form-service');
+    const serviceName = serviceSelect.options[serviceSelect.selectedIndex].text;
+    const message = document.getElementById('form-message').value;
+
+    const formattedMessage = `Hello M ONE SPACE, I would like to request a consultation.\n\n*Name:* ${name}\n*Phone:* ${phone}\n*Service:* ${serviceName}\n*Message:* ${message || 'None'}`;
+    const whatsappUrl = `https://wa.me/919601126500?text=${encodeURIComponent(formattedMessage)}`;
+    
+    window.open(whatsappUrl, '_blank');
+}
+
+function handleModalWhatsAppSubmit(event) {
+    event.preventDefault();
+    
+    const form = document.getElementById('modal-enquiry-form');
+    if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+    }
+    
+    const name = document.getElementById('modal-name').value;
+    const phone = document.getElementById('modal-phone').value;
+    const email = document.getElementById('modal-email').value;
+    const projectName = document.getElementById('modal-hidden-project-name').value;
+
+    const formattedMessage = `Hello M ONE SPACE, I am interested in the project: *${projectName}*.\n\n*Name:* ${name}\n*Phone:* ${phone}\n*Email:* ${email || 'Not provided'}`;
+    const whatsappUrl = `https://wa.me/919601126500?text=${encodeURIComponent(formattedMessage)}`;
+    
+    window.open(whatsappUrl, '_blank');
+}
+
+// 10. Dedicated About Page Animations & Interactive Testimonials
+let testimonialIndex = 0;
+let testimonialAutoPlay;
+
+function showTestimonial(index) {
+    const slides = document.querySelectorAll('.testimonial-slide');
+    const dots = document.querySelectorAll('.carousel-dot');
+    
+    if (slides.length === 0) return; // Exit if not on about.html
+    
+    if (index >= slides.length) {
+        testimonialIndex = 0;
+    } else if (index < 0) {
+        testimonialIndex = slides.length - 1;
+    } else {
+        testimonialIndex = index;
+    }
+    
+    slides.forEach((slide, i) => {
+        slide.classList.remove('active');
+        if (dots[i]) dots[i].classList.remove('active');
+    });
+    
+    slides[testimonialIndex].classList.add('active');
+    if (dots[testimonialIndex]) dots[testimonialIndex].classList.add('active');
+}
+
+function nextTestimonial() {
+    showTestimonial(testimonialIndex + 1);
+}
+
+function prevTestimonial() {
+    showTestimonial(testimonialIndex - 1);
+}
+
+function setTestimonial(index) {
+    clearInterval(testimonialAutoPlay);
+    showTestimonial(index);
+    startTestimonialTimer();
+}
+
+function startTestimonialTimer() {
+    testimonialAutoPlay = setInterval(nextTestimonial, 8000);
+}
+
+// Consultation Planner Data
+const plannerData = {
+    construction: {
+        title: "New Construction Booking Checklist",
+        mid: {
+            checklist: [
+                "Developer RERA registration number verification",
+                "Sanctioned builder layout plans review",
+                "Draft booking form terms audit",
+                "Allotment letter signature check",
+                "First booking check verification logs"
+            ],
+            step: "Schedule initial virtual session to select inventory plots within authorized builder inventory lists."
+        },
+        premium: {
+            checklist: [
+                "Full Title clearance certification search",
+                "Escrow account transaction authorization logs",
+                "Builder-buyer agreement draft audit",
+                "Development milestone payment schedule checklist",
+                "Municipality utility layout permit verification"
+            ],
+            step: "Arrange physical site visit with Maulik Patel's executive advisor to review unit layouts."
+        },
+        elite: {
+            checklist: [
+                "Comprehensive independent title search report (30 years)",
+                "Elite launch discount allocations confirmation",
+                "Bespoke payment schedule terms configuration",
+                "RERA escrow balance compliance check",
+                "Construction quality structural audit certifications verification"
+            ],
+            step: "Connect directly with Maulik Patel via VIP priority booking layout planning session."
+        }
+    },
+    bungalows: {
+        title: "Standalone Bungalows Blueprint",
+        mid: {
+            checklist: [
+                "Non-Agricultural (NA) land permit search",
+                "Plot boundaries alignment check",
+                "Local municipal plan approvals",
+                "Society registration draft check"
+            ],
+            step: "Schedule site verification coordinates check with our layout planning auditor."
+        },
+        premium: {
+            checklist: [
+                "Complete NA permit validation report",
+                "Independent land registry ownership clearances check",
+                "Utility water-power source layout sanction review",
+                "Architectural drawing structural clearance checks"
+            ],
+            step: "Initiate site visit with land clearance certificates matching sessions."
+        },
+        elite: {
+            checklist: [
+                "Pre-buy independent land title search verification (30 years)",
+                "Bespoke designer boundary limits validation clearances",
+                "Municipality drainage-road access permit clearance review",
+                "Full developer indemnity contract configuration audits"
+            ],
+            step: "Schedule a direct consultation with Maulik Patel to verify premium independent plots."
+        }
+    },
+    resales: {
+        title: "Premium Resale Verification",
+        mid: {
+            checklist: [
+                "Original sale deed tracking search",
+                "Society NOC clearance receipt checks",
+                "Share certificate verification check",
+                "Utility payment balance status"
+            ],
+            step: "Submit ownership documents copy to our legal advisory panel."
+        },
+        premium: {
+            checklist: [
+                "Non-encumbrance certificate validation (13 years)",
+                "Society mutation entries checking",
+                "Mortgage liability bank release clearance check",
+                "Property tax registry status search"
+            ],
+            step: "Schedule buyer-seller alignment meeting for title terms confirmation."
+        },
+        elite: {
+            checklist: [
+                "Complete Non-encumbrance report (30 years)",
+                "Full original chain of agreements validation",
+                "Certified structural stability audits review",
+                "Bespoke property valuation matrix checking"
+            ],
+            step: "Arrange a priority document ledger audit with Maulik Patel."
+        }
+    },
+    leases: {
+        title: "Corporate rentals & Leases Plan",
+        mid: {
+            checklist: [
+                "Draft standard lease contract template",
+                "Security deposit escrow balance verification",
+                "Property inventory checklist log",
+                "Society tenant rules NOC check"
+            ],
+            step: "Configure standard e-agreement terms check."
+        },
+        premium: {
+            checklist: [
+                "Registered lease deed terms auditing",
+                "Power of Attorney signature validation search",
+                "Custom indemnity covenants check",
+                "Police notification coordinates verification"
+            ],
+            step: "Draft lease agreement with specific corporate indemnity clauses."
+        },
+        elite: {
+            checklist: [
+                "Custom multi-year registered lease deed drafting",
+                "Elite tenant background profile validation checks",
+                "Corporate bank guarantee verification log",
+                "Full property utility restoration safety audits"
+            ],
+            step: "Schedule board-level lease clearance negotiation meeting with Maulik Patel."
+        }
+    },
+    registry: {
+        title: "Registry & Stamp duty Filings",
+        mid: {
+            checklist: [
+                "Stamp duty online calculation check",
+                "Buyer-seller PAN-Aadhaar coordinates check",
+                "Online token booking details",
+                "Index-2 print copy submission format"
+            ],
+            step: "Upload transaction deeds draft copy for stamp calculation."
+        },
+        premium: {
+            checklist: [
+                "Deed draft proofing and audit checks",
+                "Tax payment records (TDS certificate check)",
+                "Registrar token scheduling logistics",
+                "Indexation records archiving layout"
+            ],
+            step: "Submit draft deed to local registrar panel validation."
+        },
+        elite: {
+            checklist: [
+                "VIP registrar room priority scheduling coordinates",
+                "Bespoke stamp saving layout options audit",
+                "Complex power of attorney title registry clearances check",
+                "Full post-registration name updates coordinates (Municipal/Electricity)"
+            ],
+            step: "Initiate elite registration logistics planning session with Maulik Patel."
+        }
+    }
+};
+
+function updateServicePlanner() {
+    const serviceSelect = document.getElementById('planner-service');
+    const budgetSelect = document.getElementById('planner-budget');
+    if (!serviceSelect || !budgetSelect) return;
+
+    const selectedService = serviceSelect.value;
+    const selectedBudget = budgetSelect.value;
+
+    const data = plannerData[selectedService];
+    if (!data) return;
+
+    const titleEl = document.getElementById('planner-title');
+    const checklistEl = document.getElementById('planner-checklist');
+    const stepEl = document.getElementById('planner-step-text');
+
+    if (titleEl) titleEl.innerText = data.title;
+    
+    if (checklistEl) {
+        checklistEl.innerHTML = '';
+        const levelData = data[selectedBudget];
+        if (levelData && levelData.checklist) {
+            levelData.checklist.forEach(item => {
+                const li = document.createElement('li');
+                li.className = 'planner-checklist-item';
+                li.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:16px; height:16px; margin-top:2px; flex-shrink:0; color:var(--accent-gold);"><polyline points="20 6 9 17 4 12"/></svg>
+                    <span>${item}</span>
+                `;
+                checklistEl.appendChild(li);
+            });
+        }
+    }
+
+    if (stepEl) {
+        const levelData = data[selectedBudget];
+        if (levelData) {
+            stepEl.innerText = levelData.step;
+        }
+    }
+}
+
+function handlePlannerWhatsAppSubmit(event) {
+    event.preventDefault();
+    
+    const nameEl = document.getElementById('planner-name');
+    const phoneEl = document.getElementById('planner-phone');
+    if (!nameEl || !phoneEl) return;
+
+    if (!nameEl.value || !phoneEl.value) {
+        alert("Please enter both your name and contact number to request your action plan.");
+        nameEl.focus();
+        return;
+    }
+
+    const name = nameEl.value;
+    const phone = phoneEl.value;
+    
+    const serviceSelect = document.getElementById('planner-service');
+    const budgetSelect = document.getElementById('planner-budget');
+    const serviceName = serviceSelect.options[serviceSelect.selectedIndex].text;
+    const budgetName = budgetSelect.options[budgetSelect.selectedIndex].text;
+
+    // Get checklist items to include in the WhatsApp text
+    const checklistItems = [];
+    document.querySelectorAll('#planner-checklist li span').forEach(el => {
+        checklistItems.push("- " + el.innerText);
+    });
+    
+    const nextStep = document.getElementById('planner-step-text').innerText;
+
+    const formattedMessage = `Hello M ONE SPACE,\n\nI am requesting my custom Advisory Blueprint action plan.\n\n*Name:* ${name}\n*Phone:* ${phone}\n*Service:* ${serviceName}\n*Transaction Class:* ${budgetName}\n\n*Required Checklist Documents:*\n${checklistItems.join('\n')}\n\n*Next Advisory Step:*\n${nextStep}`;
+    const whatsappUrl = `https://wa.me/919601126500?text=${encodeURIComponent(formattedMessage)}`;
+    
+    window.open(whatsappUrl, '_blank');
+}
+
+// Auto-run when document loads
+document.addEventListener('DOMContentLoaded', () => {
+    // Initialise testimonial cycle if slides exist
+    const slides = document.querySelectorAll('.testimonial-slide');
+    if (slides.length > 0) {
+        showTestimonial(0);
+        startTestimonialTimer();
+    }
+    
+    // Initialise Consultation Planner default values
+    updateServicePlanner();
+
+    // Scroll listener for about page hero banner parallax zoom
+    window.addEventListener('scroll', () => {
+        const aboutHero = document.querySelector('.about-hero-banner');
+        if (aboutHero) {
+            const scrollPos = window.pageYOffset;
+            aboutHero.style.backgroundPosition = `center ${scrollPos * 0.3}px`;
+        }
+    });
 });
