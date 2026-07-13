@@ -1745,6 +1745,10 @@ section {
 .partnerships-cards-grid .partner-card:nth-child(4) { transition-delay: 0.3s; }
 .partnerships-cards-grid .partner-card:nth-child(5) { transition-delay: 0.4s; }
 .partnerships-cards-grid .partner-card:nth-child(6) { transition-delay: 0.5s; }
+.partnerships-cards-grid .partner-card:nth-child(7) { transition-delay: 0.6s; }
+.partnerships-cards-grid .partner-card:nth-child(8) { transition-delay: 0.7s; }
+.partnerships-cards-grid .partner-card:nth-child(9) { transition-delay: 0.8s; }
+.partnerships-cards-grid .partner-card:nth-child(10) { transition-delay: 0.9s; }
 
 /* Golden hover sweep keyframe */
 @keyframes goldSweep {
@@ -3409,6 +3413,11 @@ body.loader-active {
         grid-template-columns: repeat(2, 1fr) !important;
         gap: 1.5rem !important;
     }
+    
+    .planner-dashboard-grid {
+        grid-template-columns: 1fr !important;
+        gap: 2.5rem !important;
+    }
 }
 
 @media (max-width: 600px) {
@@ -3514,6 +3523,10 @@ body.loader-active {
     .planner-horizontal-controls {
         grid-template-columns: 1fr !important;
         gap: 1rem !important;
+    }
+    
+    .planner-console-dashboard {
+        padding: 2rem 1.5rem !important;
     }
 
     .timeline-line {
@@ -3954,6 +3967,7 @@ body.loader-active {
 /* Lightbox Gallery Slideshow Styles */
 .gallery-nav-btn {
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    z-index: 100;
 }
 
 .gallery-nav-btn:hover {
@@ -3965,6 +3979,30 @@ body.loader-active {
 
 .gallery-close-btn {
     transition: all 0.3s ease !important;
+    z-index: 100;
+}
+
+@media (max-width: 768px) {
+    .gallery-nav-btn {
+        width: 48px !important;
+        height: 48px !important;
+        background: rgba(0, 22, 24, 0.8) !important;
+        border: 1px solid rgba(212, 201, 168, 0.3) !important;
+    }
+    .gallery-nav-btn.prev-btn {
+        left: 0.75rem !important;
+    }
+    .gallery-nav-btn.next-btn {
+        right: 0.75rem !important;
+    }
+    .gallery-close-btn {
+        top: 1rem !important;
+        right: 1rem !important;
+    }
+    .gallery-content {
+        max-width: 90% !important;
+        max-height: 90% !important;
+    }
 }
 
 .gallery-close-btn:hover {
