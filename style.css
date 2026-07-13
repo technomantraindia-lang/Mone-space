@@ -1973,6 +1973,59 @@ section {
     .footer-top-row {
         grid-template-columns: 1fr;
     }
+    
+    /* Contact Section Center Alignment on Mobile */
+    .contact-info-panel {
+        padding: 2.5rem 1.5rem;
+        text-align: center;
+        align-items: center;
+    }
+    
+    .contact-info-panel .section-tag {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .contact-info-panel .section-title {
+        text-align: center;
+    }
+    
+    .contact-details-list {
+        align-items: center;
+        width: 100%;
+    }
+    
+    .contact-detail-item {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 0.75rem;
+    }
+    
+    .contact-detail-item .detail-text {
+        align-items: center;
+        text-align: center;
+    }
+    
+    .owner-metadata {
+        text-align: center;
+        width: 100%;
+        margin-top: 2.5rem;
+        padding-top: 1.5rem;
+    }
+    
+    .contact-form-panel {
+        padding: 2.5rem 1.5rem;
+    }
+    
+    .form-panel-title,
+    .form-panel-subtitle {
+        text-align: center;
+    }
+    
+    .contact-phone-wrapper {
+        justify-content: center;
+    }
 }
 
 /* Unique Services Split Layout Styling */
@@ -3134,8 +3187,9 @@ body.loader-active {
 /* Founder Profile Layout Section styling */
 .founder-layout-grid {
     display: grid;
-    grid-template-columns: 35% 65%;
-    gap: 5rem;
+    grid-template-columns: 1fr;
+    max-width: 800px;
+    margin: 0 auto;
     align-items: center;
 }
 
@@ -4015,4 +4069,14 @@ body.loader-active {
 /* Prevent body scroll when active */
 body.modal-open {
     overflow: hidden !important;
+}
+
+/* Custom mobile centering refinements */
+@media (max-width: 480px) {
+    .contact-info-panel {
+        padding: 2rem 1.05rem !important;
+    }
+    .contact-form-panel {
+        padding: 2rem 1.05rem !important;
+    }
 }
