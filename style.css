@@ -1152,11 +1152,7 @@ section {
 }
 
 .builder-name {
-    font-size: 0.8rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--accent-gold-dark);
+    display: none !important;
 }
 
 .property-tag {
@@ -3951,11 +3947,7 @@ body.loader-active {
 }
 
 .builder-label {
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--accent-gold-dark);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    display: none !important;
 }
 
 .type-label {
@@ -4079,4 +4071,9 @@ body.modal-open {
     .contact-form-panel {
         padding: 2rem 1.05rem !important;
     }
+}
+
+.bright-gold {
+    color: #e5a93c !important;
+    font-weight: 800;
 }
