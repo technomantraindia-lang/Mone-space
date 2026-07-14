@@ -410,6 +410,7 @@ function triggerSearch() {
     });
 }
 
+
 // 8. Lead Consultation Form Submission Handler
 function handleFormSubmit(event) {
     event.preventDefault();
@@ -418,29 +419,65 @@ function handleFormSubmit(event) {
     const phone = document.getElementById('form-phone').value;
     const serviceSelect = document.getElementById('form-service');
     const serviceName = serviceSelect.options[serviceSelect.selectedIndex].text;
-    const msgAlert = document.getElementById('form-response-msg');
-    const submitBtn = document.getElementById('form-submit-button');
+    const message = document.getElementById('form-message').value;
+    const msgAlert = document.getElementById('form-response-msg') || document.getElementById('contact-response-msg');
+    const submitBtn = document.getElementById('form-submit-button') || document.getElementById('btn-callback-submit');
 
-    submitBtn.innerText = "Processing Details...";
-    submitBtn.disabled = true;
+    if (submitBtn) {
+        submitBtn.innerText = "Processing Details...";
+        submitBtn.disabled = true;
+    }
 
-    // Simulate luxury API response lag
-    setTimeout(() => {
-        submitBtn.innerText = "Submit Callback";
-        submitBtn.disabled = false;
-        
-        // Show structured success feedback
-        msgAlert.style.display = "block";
-        msgAlert.innerHTML = `<strong>Consultation Requested!</strong><br>Thank you, ${name}. Maulik Patel's consulting office will contact you via <strong>Phone call</strong> on <strong>${phone}</strong> shortly regarding your interest in: <em>"${serviceName}"</em>.`;
-        
-        // Reset form
-        document.getElementById('consultation-form').reset();
-
+    // Send via Web3Forms API
+    fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+            access_key: '4ebe44e9-2378-42f8-978c-a84b5fe17a4d',
+            name: name,
+            phone: phone,
+            subject: 'New Consultation Request - M ONE SPACE',
+            from_name: 'M ONE SPACE Website',
+            service: serviceName,
+            message: message || 'No message provided'
+        })
+    })
+    .then(async (response) => {
+        if (response.status == 200) {
+            // Show structured success feedback
+            if (msgAlert) {
+                msgAlert.style.display = "block";
+                msgAlert.innerHTML = `<strong>Consultation Requested!</strong><br>Thank you, ${name}. Maulik Patel's consulting office will contact you via <strong>Phone call</strong> on <strong>${phone}</strong> shortly regarding your interest in: <em>"${serviceName}"</em>.`;
+            }
+            // Reset form
+            const form = document.getElementById('consultation-form');
+            if (form) form.reset();
+        } else {
+            if (msgAlert) {
+                msgAlert.style.display = "block";
+                msgAlert.innerHTML = `<strong>Submission Error!</strong><br>Something went wrong. Please connect with us directly via WhatsApp.`;
+            }
+        }
+    })
+    .catch(error => {
+        if (msgAlert) {
+            msgAlert.style.display = "block";
+            msgAlert.innerHTML = `<strong>Connection Error!</strong><br>Failed to reach server. Please connect with us directly via WhatsApp.`;
+        }
+    })
+    .finally(() => {
+        if (submitBtn) {
+            submitBtn.innerText = "Submit Callback";
+            submitBtn.disabled = false;
+        }
         // Fade alert out after 10s
         setTimeout(() => {
-            msgAlert.style.display = "none";
+            if (msgAlert) msgAlert.style.display = "none";
         }, 10000);
-    }, 1500);
+    });
 }
 
 // 9. Enquiry Modal Dialog Operations
@@ -453,7 +490,7 @@ function openEnquiryModal(projectName) {
     if (modal) {
         modalHiddenField.value = projectName;
         modalTitle.innerText = `Enquire: ${projectName}`;
-        modalResponse.style.display = "none";
+        if (modalResponse) modalResponse.style.display = "none";
         modal.style.display = "flex";
         setTimeout(() => {
             modal.classList.add('active');
@@ -466,7 +503,8 @@ function closeEnquiryModal() {
         modal.classList.remove('active');
         setTimeout(() => {
             modal.style.display = "none";
-            document.getElementById('modal-enquiry-form').reset();
+            const form = document.getElementById('modal-enquiry-form');
+            if (form) form.reset();
         }, 300);
     }
 }
@@ -477,26 +515,67 @@ function handleModalSubmit(event) {
     
     const name = document.getElementById('modal-name').value;
     const phone = document.getElementById('modal-phone').value;
+    const email = document.getElementById('modal-email').value;
     const projectName = modalHiddenField.value;
+    const msgAlert = document.getElementById('modal-response-msg');
     const submitBtn = document.getElementById('btn-modal-submit');
 
-    submitBtn.innerText = "Sending Request...";
-    submitBtn.disabled = true;
+    if (submitBtn) {
+        submitBtn.innerText = "Sending Request...";
+        submitBtn.disabled = true;
+    }
 
-    setTimeout(() => {
-        submitBtn.innerText = "Submit Callback";
-        submitBtn.disabled = false;
-        
-        modalResponse.style.display = "block";
-        modalResponse.innerHTML = `<strong>Enquiry Saved!</strong><br>Thank you, ${name}. Our dedicated channel team has scheduled an update for you regarding <strong>${projectName}</strong>. We'll connect with you via <strong>Phone call</strong> on <strong>${phone}</strong>.`;
-        
-        document.getElementById('modal-enquiry-form').reset();
+    // Send via Web3Forms API
+    fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+            access_key: '4ebe44e9-2378-42f8-978c-a84b5fe17a4d',
+            name: name,
+            phone: phone,
+            email: email || 'Not provided',
+            subject: `New Project Enquiry: ${projectName} - M ONE SPACE`,
+            from_name: 'M ONE SPACE Website',
+            project: projectName,
+            message: `Interested in: ${projectName}\nEmail: ${email || 'Not provided'}`
+        })
+    })
+    .then(async (response) => {
+        if (response.status == 200) {
+            if (msgAlert) {
+                msgAlert.style.display = "block";
+                msgAlert.innerHTML = `<strong>Enquiry Saved!</strong><br>Thank you, ${name}. Our dedicated channel team has scheduled an update for you regarding <strong>${projectName}</strong>. We'll connect with you via <strong>Phone call</strong> on <strong>${phone}</strong>.`;
+            }
+            
+            const form = document.getElementById('modal-enquiry-form');
+            if (form) form.reset();
 
-        // Auto close modal after brief delay
-        setTimeout(() => {
-            closeEnquiryModal();
-        }, 5000);
-    }, 1500);
+            // Auto close modal after brief delay
+            setTimeout(() => {
+                closeEnquiryModal();
+            }, 5000);
+        } else {
+            if (msgAlert) {
+                msgAlert.style.display = "block";
+                msgAlert.innerHTML = `<strong>Submission Error!</strong><br>Something went wrong. Please try again.`;
+            }
+        }
+    })
+    .catch(error => {
+        if (msgAlert) {
+            msgAlert.style.display = "block";
+            msgAlert.innerHTML = `<strong>Connection Error!</strong><br>Failed to reach server. Please try again.`;
+        }
+    })
+    .finally(() => {
+        if (submitBtn) {
+            submitBtn.innerText = "Submit Callback";
+            submitBtn.disabled = false;
+        }
+    });
 }
 
 // Close Modal when clicking outer backdrop
