@@ -4079,3 +4079,26 @@ body.modal-open {
     color: #e5a93c !important;
     font-weight: 800;
 }
+
+/* Google Maps Address Link styling */
+.address-map-link {
+    color: inherit;
+    text-decoration: none;
+    transition: var(--transition-fast);
+    display: inline-block;
+    cursor: pointer;
+}
+
+.address-map-link:hover {
+    color: var(--accent-gold) !important;
+    text-decoration: underline;
+    text-decoration-color: var(--accent-gold);
+}
+
+/* On light backgrounds (like cards in contact / index page), hover to dark gold */
+.info-contact-card .address-map-link:hover,
+.contact-detail-item .address-map-link:hover {
+    color: var(--accent-gold-dark) !important;
+    text-decoration-color: var(--accent-gold-dark);
+}
+
